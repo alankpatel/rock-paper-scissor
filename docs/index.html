@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <h1>First to 5. Refresh once Finished</h1>
+    <h1>Player Score:</h1>
+    <h2 class="player">0</h2>
+    <h1>Computer Score:</h1>
+    <h2 class="computer">0</h2>
+    <button class="rock">rock</button>
+    <button class="paper">paper</button>
+    <button class="scissor">scissor</button>
+    <div class=results></div>
+    <script>
+        //let playerChoice = prompt("rock paper or scissors");
+
+        //playerChoice = playerChoice.toLowerCase();
+        //console.log(`your choice is ${playerChoice}`);
+
+        const moves = Array.from(document.querySelectorAll("button"));
+
+
+        moves.forEach(move => move.addEventListener('click', playRound));
+
+        function computerPlay() {
+            randomNumber = Math.random();
+            if (randomNumber < .33) {
+                return "rock";
+            } else if (randomNumber < .66) {
+                return "paper";
+            } else {
+                return "scissor";
+            }
+        }
+        function userPlay(e) {
+            console.log(e.srcElement.className)
+            // let playerChoice = prompt("rock paper or scissors");
+            return e.srcElement.className;
+        }
+        const results = document.querySelector('.results');
+        const p = document.createElement('p');
+        results.appendChild(p);
+        const player = document.querySelector('.player');
+        const computer = document.querySelector('.computer');
+        let playerScore = 0;
+        let computerScore = 0;
+        function playRound(e) {
+            let playerMove = e.srcElement.className;
+            let computerMove = computerPlay();
+            
+
+            if (playerMove === "paper" && computerMove === "rock") {
+                //console.log(`You have won! the round!`);
+                p.textContent = 'You have won the round!';
+                //results.appendChild(p);
+                playerScore++; //return 0 for user won
+            } else if (playerMove === "paper" && computerMove === "scissor") {
+                //console.log(`You have lost! the round!`);
+                p.textContent = 'You have lost the round!';
+               // results.appendChild(p);
+                computerScore++; //return 1 for computer won
+            } else if (playerMove === "rock" && computerMove === "paper") {
+                //console.log(`You have lost the round!`);
+                p.textContent = 'You have lost the round!';
+             //   results.appendChild(p);
+                computerScore++; //return 1 for computer won
+            } else if (playerMove === "rock" && computerMove === "scissor") {
+                //console.log(`You have won the round!`);
+                p.textContent = 'You have won the round!';
+             //   results.appendChild(p);
+                playerScore++; //return 0 for user won
+            } else if (playerMove === "scissor" && computerMove === "paper") {
+                console.log(`You have won the round!`);
+                p.textContent = 'You have won the round!';
+             //   results.appendChild(p);
+                playerScore++; //return 0 for user won 
+            } else if (playerMove === "scissor" && computerMove === "rock") {
+                console.log(`You have lost the round!!`);
+                p.textContent = 'You have lost the round!';
+            //    results.appendChild(p);
+                computerScore++; //return 1 for computer won
+            } else {
+                console.log(`You have tied the round!!`);
+                p.textContent = 'You have tied the round!!';
+            //    results.appendChild(p);
+                //return 2 for tied
+            }
+            player.textContent = playerScore;
+            computer.textContent = computerScore;
+            if (playerScore == 5) {
+                const h1 = document.createElement('h1');
+                h1.style.color = "blue";
+                h1.textContent = "YOU HAVE WON";
+                results.appendChild(h1);
+            }
+            if (computerScore == 5) {
+                const h1 = document.createElement('h1');
+                h1.style.color = "red";
+                h1.textContent = "YOU HAVE LOST";
+                results.appendChild(h1);
+            }
+
+        }
+        //console.log(`computer choice is ${computerPlay()}`);
+        /*
+        function playGame() {
+            let counter = 0;
+            let computerCounter = 0;
+            let whoWon;
+            for (let i = 0; i < 5; i++) {
+                whoWon = playRound();
+                if (whoWon === 0) {
+                    counter = counter + 1;
+                } else if (whoWon == 1) {
+                    computerCounter = computerCounter + 2;
+                } else {
+                    counter = counter + 1;
+                    computerCounter = computerCounter + 1;
+                }
+            }
+            if (counter == 5 && computerCounter == 5) {
+                console.log(`You have tied the game!`);
+            } else if (counter == 5) {
+                console.log(`You have won the game!`);
+            } else {
+                console.log(`You have lost the game!`);
+            }
+        }
+        */
+    //playGame();
+
+    </script>
+</body>
+
+</html>
